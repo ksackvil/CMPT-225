@@ -1,7 +1,7 @@
 /*
 * Circle.cpp
 *
-* Description: This class models a rectangle ...
+* Description: This is the class implementation for Circle.h
 *
 * Author: Kai Sackville-Hii
 * Creation date: Jan 11, 2019
