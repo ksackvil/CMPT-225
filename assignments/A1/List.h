@@ -51,6 +51,8 @@ public:
 	// Description: Returns the total element count currently stored in List.
 	int  getElementCount() const;
 
+	Patient* valueAt(int index);
+
 	// Description: Insert an element.
 	// Precondition: newElement must not already be in data collection.  
 	// Postcondition: newElement inserted and elementCount has been incremented.   

@@ -27,8 +27,16 @@ List::List()
 // Description: Returns the total element count currently stored in List.
 int  List::getElementCount() const
 {
-    cout << elements[0];
     return(elementCount);
+}
+
+Patient* List::valueAt(int index)
+{
+    Patient *returnPtr;
+
+    returnPtr = &elements[index];
+
+    return(returnPtr);
 }
 
 // Description: Insert an element.
@@ -96,6 +104,36 @@ void List::removeAll()
 
     // No elements, update elementCount 
     elementCount = 0;
+}
+
+// Description: Search for target element.
+//              Returns a pointer to the element if found,
+//              otherwise, returns NULL.
+Patient* List::search(const Patient& target) 
+{
+    Patient *returnedPtr; // Ptr to target object
+    bool found = false;   // Flag determing if ptr will be returned
+
+    // Search for element with same careCard as target, if found point returnedPtr
+    // to the address of the element. 
+    for(int it = 0; it < MAX_ELEMENTS; it++)
+    {
+        if(target.getCareCard() == elements[it].getCareCard())
+        {
+            returnedPtr = &elements[it];
+            found = true;
+        }
+    }
+    
+    // if there exists target within elements return the pointer otherwise return NULL
+    if(found)
+    {
+        return(returnedPtr);
+    }
+    else
+    {
+        return(NULL);
+    }
 }
 
 void List::printAll() 
