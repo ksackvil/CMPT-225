@@ -7,9 +7,9 @@
  *                  This care card number cannot be modified. 
  *
  * Table of Contents: 
- * 		- CONSTRUCTORS -
- * 		- SETTERS AND GETTERS -
- * 		- OTHER METHODS -
+ * 		- CONSTRUCTORS        - line 50
+ * 		- SETTERS AND GETTERS - line 64
+ * 		- OVERLOADS           - line 93
  * 
  * Author: Kai Sackville-Hii
  * Date: January 23, 2019
@@ -90,7 +90,7 @@ public:
 	// Description: Sets the patient's email.
 	void setEmail(const string anEmail);
 
-	// ---------- OTHER METHODS ---------- //
+	// ---------- OVERLOADS ---------- //
 
 	// Overloaded Operators
 	// Description: Comparison operator. Compares "this" Patient object with "rhs" Patient object.
