@@ -98,7 +98,7 @@ int main()
             // if the card already exists
             if(list.cardExists(payload))
             {
-               cout << "Error: patient " << payload << " exists, nothing added.\n";
+               cout << "Error: patient '" << payload << "' exists, nothing added.\n";
             }
             // make sure that there is space to add
             else if(list.getElementCount() == 5)
@@ -179,7 +179,7 @@ int main()
                 // If no patient with that care card was found output error msg
                 if(!cmdExecuted)
                 {
-                    cout << "Patient with care card " << payload << " does not exist\n";
+                    cout << "Patient with care card '" << payload << "' does not exist\n";
                 }
             }   
             else
