@@ -11,3 +11,6 @@ eval.o:	eval.cpp Scanner.h Stack.h
 clean:	
 	rm -f *.o infixeval
 
+dev:
+	g++ -o infixeval Scanner.cpp eval.cpp -std=c++0x
+	./infixeval

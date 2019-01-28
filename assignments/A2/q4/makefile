@@ -13,3 +13,7 @@ main.o:	main.cpp Queue.h
 clean:	
 	rm -f x *.o
 
+dev: 
+	g++ Queue.cpp main.cpp -o x
+	./x
+

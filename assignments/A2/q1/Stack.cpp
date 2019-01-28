@@ -4,7 +4,7 @@
  * Description: Implementation of an int sequence with push/pop ...
  * Class Invariant: ... in a LIFO order
  *
- * Author:
+ * Author: Kai Sackville-Hii 
  * Date:
  */
  
