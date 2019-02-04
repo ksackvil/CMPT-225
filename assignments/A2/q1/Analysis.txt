@@ -1,0 +1,77 @@
+Question 2: Running-Time Analysis
+By Kai Sackville-Hii.
+
+a) Analyzing Stack::push()
+    
+    Our push algorithm has a constant Big-O of O(1). This is because the linked-list 
+    does not need to be traversed, any new node pushed to the Stack only needs 
+    to be added to the tail of the linked-list (ie: tail->next = newNode;).
+    An example of pushing the int 3 is shown below.
+
+    ================= Example ==================
+
+    * Original list with 2 nodes.
+
+    head -> [ 1 ] -> [ 2 ] -> NULL
+                           <- tail  
+
+    * Call push(3), a new node is created.
+    
+    [ 3 ] -> NULL
+
+    * Point tail->next and tail to the new node.
+
+    head -> [ 1 ] -> [ 2 ] -> [ 3 ] -> NULL
+                                    <- tail  
+
+    ============================================
+
+    As the example above shows, all push really does is point tail-> next 
+    and tail to the newly created node, therefore Stack::push is in O(1).
+
+    ====== Answer ======
+
+            O(1)
+
+    ====================
+
+b) Analyzing Stack::pop()
+
+    Our pop algorithm has a Big-O of O(n). In it we must traverse the list searching
+    for the node to pop, which in a stack implementation is the tail of the list
+    (top of the stack). We must always traverse to the end since we use a singly 
+    linked list, meaning n nodes must be checked, therefore Stack::pop() has a
+    Big-O of O(n). An example usage of pop is shown below to illustrate this point.
+
+    ================ Example ====================
+
+    * Original list with 2 nodes.
+
+    head -> [ 1 ] -> [ 2 ] -> NULL
+                           <- tail  
+
+    * Traverse list until current->next == null;
+
+    (n=1)
+    head -> [ 1 ] -> [ 2 ] -> NULL
+                           <- tail  
+                  <- current
+
+    (n=2)
+    head -> [ 1 ] -> [ 2 ] -> NULL
+                           <- tail  
+                           <- current
+                  <- previous
+    
+    
+
+    * return element which current is pointing to 
+    then delete it. point tail to previous.
+
+    =============================================
+
+    ====== Answer ======
+
+            O(n)
+
+    ====================

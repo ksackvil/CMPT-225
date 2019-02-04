@@ -20,7 +20,8 @@ int main ()
     {
         // reset calc flag
         calculate = false; 
-        cout << t.tt << endl;
+
+        cout << endl << t.text << endl;
 
         // ----- PARSE INPUT ----- //
 
@@ -86,7 +87,7 @@ int main ()
 
             // store this result in numstack
             numstack.push(result);   
-            cout << result.val;
+            cout << endl << "ans = " << result.val << endl;
         }
         else 
         {

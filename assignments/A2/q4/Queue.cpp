@@ -1,8 +1,14 @@
 /* 
- * Queue.cpp
+ * Queue.h
  *
- * Description: Implementation of an int sequence with enqueue/dequeue ...
- * Class Invariant: ... in FIFO order
+ * Description: 
+ *      Implementation of a dynamic queue using an int list sequence. The list size is 
+ *      doubled when enqueue is called and the list is full, and halved when dequeue is
+ *      called and the list is less than 1/4 full.
+ * 
+ * Class Invariant: 
+ *      the list is in FIFO order. Elements enqueued into the list must be of type int.
+ *      Cannot deque or peek if list is empty.
  *
  * Author: Kai Sackville-Hii
  * Date: Feb 6, 2019
@@ -71,21 +77,29 @@ void Queue::dequeue()
 {
     if(elementCount != 0)
     {
-        int halfCapacity = capacity / 2; 
+        int halfCapacity = capacity / 2; // Half of the current capacity used if shrinking 
+        int *elements_copy = NULL;       // Elements copy which will replace elements at the end
 
-        // if array is less than 25% full halve the capacity.
-        if( (float)elementCount / float(capacity) < 0.25 && halfCapacity >= INITIAL_SIZE)
+        // if after removeing another element the array is less than 25% full, halve the capacity.
+        if( (float)(elementCount-1) / float(capacity) < 0.25 && halfCapacity >= INITIAL_SIZE)
         {   
             // array with half the capacity as elements
-            int *elements_copy = new int [halfCapacity];
+            elements_copy = new int [halfCapacity];
 
             // copy old array to new one
             for(int el=0; el<halfCapacity; el++)
             {
-                cout << elements[el] << " ";
-                elements_copy[el] = elements[el];
+                if(el == 0) // do not copy first element (removes it)
+                {
+                    continue;
+                }
+                else if(el < elementCount) // copy over all elements back an index ( 2nd place becomes 1st)
+                {
+                    elements_copy[el-1] = elements[el]; 
+                }
             }
 
+            // set elements and new capacity.
             capacity = halfCapacity;
             elements = elements_copy;
         }
@@ -93,12 +107,19 @@ void Queue::dequeue()
         else
         {
             // array to copy to
-            int *elements_copy = new int[capacity]; 
+            elements_copy = new int[capacity]; 
 
             // copy old array to new one
             for(int el=0; el<capacity; el++)
             {
-                elements_copy[el-1] = elements[el];               
+                if(el == 0) // do not copy first element (removes it)
+                {
+                    continue;
+                }
+                else if(el < elementCount) // copy over all elements back an index ( 2nd place becomes 1st)
+                {
+                    elements_copy[el-1] = elements[el]; 
+                }
             }
 
             // set elements
@@ -110,14 +131,12 @@ void Queue::dequeue()
     }
 } // dequeue
 
-
 // Desc:  Returns a copy of the frontmost element (O(1))
 // Pre:  Queue not empty
 int Queue::peek() const 
 {
     return elements[frontindex];
 } // top
-
 
 // Desc:  Returns true if and only if queue empty (O(1))
 bool Queue::isEmpty() const 
@@ -148,4 +167,3 @@ void Queue::printQueue() const
         cout << endl;
     }
 }
-

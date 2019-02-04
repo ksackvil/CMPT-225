@@ -16,20 +16,21 @@ int main () {
     }
 
     // dequeue 2x elements
-    // for (int i = 0; i < 2; i++) {
-    //     int y = Q.peek();
-    //     Q.dequeue();
-    //     cout << "\nremoved: " << y << endl
-    //         << "top is now: " << Q.peek() << endl;
-    // }
+    for (int i = 0; i < 2; i++) {
+        int y = Q.peek();
+        Q.dequeue();
+        cout << "\nremoved: " << y << endl
+            << "top is now: " << Q.peek() << endl;
+        Q.printQueue();
+    }
 
     // enqueue 6, 7, 8, 9, 10
-    // for (int i = 6; i <= 10; i++) 
-    // {
-    //     Q.enqueue(i);
-    //     cout << "\nenqueue " << i << endl;
-    //     Q.printQueue();
-    // }
+    for (int i = 6; i <= 10; i++) 
+    {
+        Q.enqueue(i);
+        cout << "\nenqueue " << i << endl;
+        Q.printQueue();
+    }
 
 
     // dequeue all elements
