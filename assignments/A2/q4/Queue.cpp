@@ -59,15 +59,23 @@ void Queue::enqueue(int x)
 
         // set capcity and elements to the newly made copy arr
         capacity = doubleCapacity;
-        elements = elements_copy;
-    }
     
-    // add new element
-    elements[backindex] = x;
+        // add new element
+        elements_copy[backindex] = x;
 
-    // set new values of back index and count
+        elements = elements_copy;
+        delete[] elements_copy;        
+    }
+    else 
+    {
+        // add new element
+        elements[backindex] = x;
+    }
+
+    // set new values of count
     elementCount++;
     backindex++;
+    
 } // enqueue
 
 
@@ -102,6 +110,7 @@ void Queue::dequeue()
             // set elements and new capacity.
             capacity = halfCapacity;
             elements = elements_copy;
+            delete[] elements_copy;
         }
         // remove item from front of queue
         else
@@ -124,6 +133,7 @@ void Queue::dequeue()
 
             // set elements
             elements = elements_copy;
+            delete[] elements_copy;
         }
     
         elementCount--;
