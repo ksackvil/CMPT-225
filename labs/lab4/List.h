@@ -22,7 +22,7 @@ class List
 {
 
 private:
-    ElementType elementCount;  // Number of elements currently stored in the List.
+  ElementType elementCount;  // Number of elements currently stored in the List.
 	Node<ElementType> *head;        // Pointer to the first node in the List.
 
 public:
