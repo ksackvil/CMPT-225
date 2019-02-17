@@ -4,8 +4,6 @@
  * Description: Node of a singly linked list 
  *              in which the data is of "int" data type.
  *              Designed and implemented as a non-ADT.
- * 
- * Class Invariant: 
  *
  * Author: Kai Sackville-Hii
  * Date: February 27, 2019
@@ -22,21 +20,27 @@ public:
 	ElementType data;   // The data in the node
 	Node* next;   		// Pointer to next node
 	
-	// Constructores
+	// default constructor
 	Node();
+
+	// one parameter constructor
 	Node(ElementType theData);
+
+	// two parameter constructor
 	Node(ElementType theData, Node* theNextNode);
 
 };
 /******* Node Public Interface - END - *******/
 
 /******* Node Implementation - START - *******/
+// default constructor
 template <class ElementType>
 Node<ElementType>::Node()
 {
 	next = NULL;
 }
 
+// one parameter constructor
 template <class ElementType>
 Node<ElementType>::Node(ElementType theData)
 {
@@ -44,6 +48,7 @@ Node<ElementType>::Node(ElementType theData)
 	next = NULL;
 }
 
+// two parameter constructor
 template <class ElementType>
 Node<ElementType>::Node(ElementType theData, Node* theNextNode)
 {

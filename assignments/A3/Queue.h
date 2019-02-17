@@ -1,12 +1,14 @@
 /* 
- * Event.h
+ * Queue.h
  *
- * Description: 
+ * Description: This file contains the template class Queue and both its Interface and Implementation.
+ *              This queue uses a dynamic circular array to hold elements. Capacity will double when 
+ *              enqueueing when queue is full, and will halve when elements is less than 25% full.
  * 
- * Class Invariant: FIFO or LILO order
+ * Class Invariant: FIFO or LILO order.
  *
  * Author: Kai Sackville-Hii
- * Date: 
+ * Date: February 27, 2019
  */
 
 #pragma once
@@ -21,17 +23,28 @@ template <class ElementType>
 class Queue 
 {
     private: 
-        static unsigned const INITIAL_SIZE = 6;
+        static unsigned const INITIAL_SIZE = 12;
         ElementType *elements;
         unsigned elementCount;  // number of elements in the queue
         unsigned capacity;      // number of cells in the array
         unsigned frontIndex;    // index the topmost element
         unsigned backIndex;     // index where the next element will be placed
 
+        // Description: Handles resizing the circular array. A new circular array of elements
+        //              will be created with newCapacity.
+        // Precondition: elements must not be empty.
+        // Postcondition: elements will have the capacity of newCapacity, the front will be 0 
+        //                (first element), and the back will be equal to newCapacity.
         bool resize(unsigned newCapacity);
 
     public:
+
+        // ---------- CONSTRUCTORS ---------- //
+
+        // Default constructor
         Queue();
+
+        // ---------- QUEUE OPPERATIONS ---------- //
 
         // Description: Returns "true" is this Queue is empty, otherwise "false".
         // Time Efficiency: O(1)
@@ -57,12 +70,21 @@ class Queue
         // Time Efficiency: O(1)
         ElementType& peek() const throw(EmptyDataCollectionException);  
 
+        // ---------- HELPERS ---------- //
+
+        // Description: Template function overloading the << opperator. 
+        // Postcontition: Each element of the queue will be printed.
         template <typename U>
         friend ostream& operator<<(ostream& os, const Queue<U>& p);
 };  
 /******* Queue Public Interface - END - *******/
 
 /******* Queue Implementation - START - *******/
+// Description: Handles resizing the circular array. A new circular array of elements
+//              will be created with newCapacity.
+// Precondition: elements must not be empty.
+// Postcondition: elements will have the capacity of newCapacity, the front will be 0 
+//                (first element), and the back will be equal to newCapacity.
 template <class ElementType>
 bool Queue<ElementType>::resize(unsigned newCapacity)
 {
@@ -97,7 +119,9 @@ bool Queue<ElementType>::resize(unsigned newCapacity)
     return true;
 } 
 
-// Desc:  Constructor
+// ---------- CONSTRUCTORS ---------- //
+
+// Default constructor
 template <class ElementType>
 Queue<ElementType>::Queue()
 {
@@ -115,6 +139,8 @@ bool Queue<ElementType>::isEmpty() const
 {
     return elementCount == 0;
 } // isempty
+
+// ---------- QUEUE OPPERATIONS ---------- //
 
 // Description: Inserts newElement at the "back" of this Queue 
 //              (not necessarily the "back" of its data structure) and 
@@ -170,8 +196,12 @@ ElementType& Queue<ElementType>::peek() const throw(EmptyDataCollectionException
     {
         return(elements[frontIndex]);
     }
-}
+} // peek
 
+// ---------- HELPERS ---------- //
+
+// Description: Template function overloading the << opperator. 
+// Postcontition: Each element of the queue will be printed.
 template <typename U>
 ostream& operator<<(ostream& os, const Queue<U>& p)
 {
@@ -181,7 +211,8 @@ ostream& operator<<(ostream& os, const Queue<U>& p)
     }
     else
     {
-        // copy old array to new one
+        // iterate through elements, print each one, indicate if element is 
+        // at the front/back of circular array (queue)
         for(int el=0; el < p.capacity; el++)
         {
             if(el == p.frontIndex)
@@ -200,5 +231,5 @@ ostream& operator<<(ostream& os, const Queue<U>& p)
     }
 
     return os;
-}
+} // operator<<
 /******* Queue Implementation - END - *******/

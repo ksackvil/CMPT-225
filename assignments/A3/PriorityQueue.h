@@ -1,11 +1,12 @@
 /*
  * PriorityQueue.h
  *
- * Description: Priority Queue
+ * Description: Template class PriorityQueue, implemented using a linked list
  * Class Invariant: The elements stored in this Priority Queue are always sorted.
  *
  * Author: Inspired by Frank M. Carrano and Tim Henry (textbook).
  * Modified: February 2019
+ * Editted by: Kai Sackville-Hii
  *
  */
 
@@ -32,6 +33,8 @@ private:
 
 public:
 
+   // ---------- CONSTRUCTORS ---------- //
+
    // Default Constructor
    PriorityQueue();
 
@@ -40,6 +43,8 @@ public:
 
    // Destructor
    ~PriorityQueue();
+
+   // ---------- QUEUE OPPERATIONS ---------- //
 
    // Description: Returns the number of elements in the Priority Queue.
    // Time Efficiency: O(1)
@@ -69,6 +74,11 @@ public:
    // Time Efficiency: O(1)
    T& peek() const throw(EmptyDataCollectionException);
 
+   // ---------- HELPERS ---------- //
+
+   // Description: Overload << opperator. For debugging purposes, outputs 
+   //              each Event objects event_type, event_time, and event_length.
+   // Postcondition: Each Event objects data will be pretty printed.
    template <typename U>
    friend ostream& operator<<(ostream& os, const PriorityQueue<U>& p);
 
@@ -88,7 +98,41 @@ PriorityQueue<T>::PriorityQueue()
 template <class T>
 PriorityQueue<T>::PriorityQueue(const PriorityQueue& rhsPriorityQueue)
 {
+   // copy elements count
+   elementCount = rhsPriorityQueue.elementCount;
 
+   // make sure head is not null
+	if(rhsPriorityQueue.head != NULL)
+	{
+		// create temp iter point to new node and point temp head to that
+		Node<T> *tempCurrent = new Node<T>;	
+		Node<T> *tempHead = tempCurrent;
+
+		// point current to head
+		Node<T> *current = rhsPriorityQueue.head;
+
+		// copy data 
+		tempCurrent->data = current->data;
+
+		// move to next current node 
+		current = current->next;
+		
+		while(current != NULL)
+		{
+			// add node and move to it
+			tempCurrent->next = new Node<T>;
+			tempCurrent = tempCurrent->next;
+			
+			// copy over data
+			tempCurrent->data = current->data;
+			
+			// move to next node
+			current = current->next;
+		}	
+
+		// head now points to temp head aka our copied queue
+		head = tempHead;
+	}
 }
 
 // Destructor
@@ -99,6 +143,7 @@ PriorityQueue<T>::~PriorityQueue()
 
    while(current != NULL)
    {
+      // move to next and delete old
       current = current->next;
       delete head;
       head = current;
@@ -138,9 +183,12 @@ bool PriorityQueue<T>::enqueue(const T& newElement)
 {
    Node<T> *newNode = new Node<T>;
 
+   // add in new nodes data
    newNode->data = newElement;
    newNode->next = NULL;
 
+   // if the list is empty than simply add new node to head, else need to add in sorted
+   // order
    if(head == NULL)
    {
       head = newNode;
@@ -155,8 +203,10 @@ bool PriorityQueue<T>::enqueue(const T& newElement)
       while(current != NULL)
       {  
 
+         // Simplest case: new node is higher priority, add in before current node.
          if(newNode->data < current->data) 
          {
+            // if previous is NULL (no where to add)
             if(elementCount == 1 || current == head)
             {
                newNode->next = current;
@@ -170,12 +220,14 @@ bool PriorityQueue<T>::enqueue(const T& newElement)
                break;
             }      
          }
+         // Base case: new node is lowest priority, add to end of queue.
          else if(current->next == NULL)
          {
             current->next = newNode;
             break;
          }
 
+         // set previous to current and move current down list
          previous = current;
          current = current->next;
       }
@@ -229,6 +281,9 @@ T& PriorityQueue<T>::peek() const throw(EmptyDataCollectionException)
     
 }
 
+// Description: Overload << opperator. For debugging purposes, outputs 
+//              each Event objects event_type, event_time, and event_length.
+// Postcondition: Each Event objects data will be pretty printed.
 template <typename U>
 ostream& operator<<(ostream& os, const PriorityQueue<U>& p)
 {

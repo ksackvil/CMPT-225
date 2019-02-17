@@ -8,34 +8,57 @@ using namespace std;
 int main() 
 {
     // Event e1, e2('A', 20, 2);   
-    PriorityQueue<Event> pq;
-    Event e0('A', 1 ,1), e1('A', 2, 4), e2('A', 3, 3), e3('A', 4, 5), e4('A', 5, 5), e5('D', 6, 0), e6('D', 7, 0);
+    // PriorityQueue<Event> pq;
 
-    // e1.setType('A');
-    // e1.setTime(21);
-    // e1.setLength(2);
+    // ----- TESTING EVENT CLASS ----- //
+    cout << "\n\n ---------- TESTING EVENT CLASS: START --------- \n\n";
+    // constructors and parameterized constructor
+    Event e0, e1('A', 22, 4), e2('A', 20, 6), e3('A', 23, 2), e4('A', 30, 3);
+    
+    // setType, setTime and setLength
+    e0.setType('A');
+    e0.setTime(1);
+    e0.setLength(5);
 
-    // cout << (e2 < e1) << endl;
+    cout << "e0 < e1\n" << "expected result : 1\n" << "actual result: ";
 
-    // e1.setType('A');
-    // e1.setTime(20);
-    // e1.setLength(3);
+    // opperator <
+    cout << (e0 < e1) << endl;
 
-    // cout << (e2 < e1) << endl;
+    e0.setTime(22);
+    cout << "Changing time to 22\n" << e0 << endl;
 
-    // e2.setType('D');
-    // e2.setTime(20);
-    // e2.setLength(3);
+    cout << "e0 < e1\n" << "expected result : 1\n" << "actual result: ";
+    cout << (e0 < e1) << endl;
 
-    // cout << (e2 < e1) << endl;
+    // opperator <<
+    e0.setType('D');
+    cout << "Changing type to 'D'\n" << e0 << endl;
+
+    cout << "e0 < e1\n" << "expected result : 0\n" << "actual result: ";
+    cout << (e0 < e1) << endl;
+
+    cout << "Geting data... should be D 22 5\n";
+    // getType, getTime, and getLength
+    cout << e0.getType() << " " << e0.getTime() << " " << e0.getLength() << endl;
+    cout << "\n\n ---------- TESTING EVENT CLASS: END --------- \n\n";
+
+    // ----- TESTING QUEUE CLASS ----- //
+    cout << "\n\n ---------- TESTING QUEUE CLASS: START --------- \n\n";
     Queue<Event> q;
 
+    // isEmpty
+    cout << "empty queue test isEmpty()\n" << "expected: 1\n"
+        << "actual: " << q.isEmpty() << endl; 
+
+    // enqueue and opperator << 
     cout << "enqueue 1, 2\n";
-    q.enqueue(e0);
-    cout << q << endl;
     q.enqueue(e1);
     cout << q << endl;
+    q.enqueue(e2);
+    cout << q << endl;
 
+    // dequeue and peek
     q.dequeue();
     cout << "dequeue\n"
         << "front is now: "<< q.peek() << endl;
@@ -48,61 +71,40 @@ int main()
     cout << q << endl;
     q.enqueue(e4);
     cout << q << endl;
+    cout << "\n\n ---------- TESTING QUEUE CLASS: END --------- \n\n";
 
-    q.dequeue();
-    cout << "dequeue\n"
-        << "front is now: "<< q.peek() << endl;
-    cout << q << endl;
+    cout << "\n\n ---------- TESTING PRIORITYQUEUE AND NODE CLASS: START --------- \n\n";
+    // default constrctor
+    PriorityQueue<Event> pq;
 
-    cout << "enqueue 6, 7\n";
-    q.enqueue(e5);
-    cout << q << endl;
-    q.enqueue(e6);
-    cout << q << endl;
+    // enqueue
+    cout << "e0" << pq;
+    pq.enqueue(e0);
+    cout << "e1" << pq;
+    pq.enqueue(e1);
+    cout << "e2" << pq;
+    pq.enqueue(e2);
+    cout << "e3" << pq;
+    pq.enqueue(e3);
+    cout << "e4" << pq;
+    pq.enqueue(e4);
 
+    // opperator << 
+    cout << "\nQueue looks like ... should be in order\n" << pq << endl;
+    cout << "\n\n ---------- TESTING PRIORITYQUEUE AND NODE CLASS: END --------- \n\n";
 
-    // q.dequeue();
-    // cout << "dequeue\n"
-    //     << "front is now: "<< q.peek() << endl;
-    // cout << q << endl;
-    // q.dequeue();
-    // cout << "dequeue\n"
-    //     << "front is now: "<< q.peek() << endl;
-    // cout << q << endl;
-    // q.dequeue();
-    // cout << "dequeue\n"
-    //     << "front is now: "<< q.peek() << endl;
-    // cout << q << endl;
-    // q.dequeue();
-    // try 
-    // {
-    // cout << "dequeue\n"
-    //     << "front is now: "<< q.peek() << endl;
-    // }
-    // catch (EmptyDataCollectionException e)
-    // {
-    //     cout << e.what();
-    // }
+    // copy constructor
+    PriorityQueue<Event> testCopyConstructor(pq);
+  
+    cout << "\ntesting copy constructor, should be identical to queue above...\n";
+    cout << testCopyConstructor << endl;
 
-    // pq.enqueue(e0);
-    // cout << "e0" << pq;
-    // pq.enqueue(e1);
-    // cout << "e1" << pq;
-    // pq.enqueue(e2);
-    // cout << "e2" << pq;
-    // pq.enqueue(e3);
-    // cout << "e3" << pq;
-    // pq.enqueue(e4);
-    // cout << "e4" << pq;
-    // pq.enqueue(e5);
-    // cout << "e5" << pq;
-    // pq.enqueue(e6);
-    // cout << "e6" << pq;
+    // dequeue
+    while(!pq.isEmpty())
+    {
+        pq.dequeue();
+        cout << "dequeued" << pq;   
+    }
 
-    // while(!pq.isEmpty())
-    // {
-    //     pq.dequeue();
-    //     cout << "dequeued" << pq;   
-    // }
     return 0;
 }

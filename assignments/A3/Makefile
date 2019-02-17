@@ -23,3 +23,6 @@ clean:
 
 3:
 	./sim < simulationShuffled3.in
+
+dev:
+	g++ -Wall -std=c++11 -o test test.cpp Event.cpp EmptyDataCollectionException.cpp
