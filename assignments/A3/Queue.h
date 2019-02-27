@@ -68,7 +68,7 @@ class Queue
         // Postcondition: This Queue is unchanged.
         // Exceptions: Throws EmptyDataCollectionException if this Queue is empty.
         // Time Efficiency: O(1)
-        ElementType& peek() const throw(EmptyDataCollectionException);  
+        ElementType peek() const throw(EmptyDataCollectionException);  
 
         // ---------- HELPERS ---------- //
 
@@ -186,7 +186,7 @@ bool Queue<ElementType>::dequeue()
 } // dequeue
 
 template <class ElementType>
-ElementType& Queue<ElementType>::peek() const throw(EmptyDataCollectionException)
+ElementType Queue<ElementType>::peek() const throw(EmptyDataCollectionException)
 {
     if(elementCount == 0)
     {

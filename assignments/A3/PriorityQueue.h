@@ -72,16 +72,31 @@ public:
    // Postcondition: This Priority Queue is unchanged.
    // Exceptions: Throws EmptyDataCollectionException if this Priority Queue is empty.
    // Time Efficiency: O(1)
-   T& peek() const throw(EmptyDataCollectionException);
+   T peek() const throw(EmptyDataCollectionException);
 
    // ---------- HELPERS ---------- //
 
+   // To deal with the warning regarding template and friend function: 
+   // I used the first "Introvert" solution described in 
+   // https://stackoverflow.com/questions/4660123/overloading-friend-operator-for-template-class
+   // The idea: only declare a particular instantiation of the << operator as a friend
+   // by inlining the operator.  
    // Description: Overload << opperator. For debugging purposes, outputs 
-   //              each Event objects event_type, event_time, and event_length.
+   //              each Event object.
    // Postcondition: Each Event objects data will be pretty printed.
-   template <typename U>
-   friend ostream& operator<<(ostream& os, const PriorityQueue<U>& p);
+   friend ostream & operator<< (ostream & os, const PriorityQueue<T>& rhs) {
+      Node<T>* current = rhs.head;
 
+      os << "elementCount = " << rhs.elementCount;
+      
+      // Traverse the list
+      while (current != NULL){
+         cout << current -> data; // Print data
+         current = current -> next; // Go to next Node
+      }
+
+      return os;
+   } // end of operator <<
 };
 /******* PriorityQueue Public Interface - END - *******/
 
@@ -268,7 +283,7 @@ bool PriorityQueue<T>::dequeue()
 // Exceptions: Throws EmptyDataCollectionException if this Priority Queue is empty.
 // Time Efficiency: O(1)
 template <class T>
-T& PriorityQueue<T>::peek() const throw(EmptyDataCollectionException)
+T PriorityQueue<T>::peek() const throw(EmptyDataCollectionException)
 {
     if(elementCount == 0)
     {
@@ -279,27 +294,5 @@ T& PriorityQueue<T>::peek() const throw(EmptyDataCollectionException)
         return(head->data);
     }
     
-}
-
-// Description: Overload << opperator. For debugging purposes, outputs 
-//              each Event objects event_type, event_time, and event_length.
-// Postcondition: Each Event objects data will be pretty printed.
-template <typename U>
-ostream& operator<<(ostream& os, const PriorityQueue<U>& p)
-{
-   Node<U> *current = NULL;
-   current = p.head;
-
-   while(current != NULL)
-   {
-      Event e = current->data;
-      os << endl 
-         << " | " << e.getType() <<  " | " << e.getTime() <<  " | " << e.getLength() << " | "
-         << endl;
-
-      current = current -> next;
-   }
-     
-   return os;
 }
 /******* PriorityQueue Implementation - END - *******/
