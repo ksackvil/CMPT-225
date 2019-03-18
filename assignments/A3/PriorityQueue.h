@@ -91,7 +91,7 @@ public:
       
       // Traverse the list
       while (current != NULL){
-         cout << current -> data; // Print data
+         cout << current -> data.frequency; // Print data
          current = current -> next; // Go to next Node
       }
 
@@ -217,7 +217,6 @@ bool PriorityQueue<T>::enqueue(const T& newElement)
 
       while(current != NULL)
       {  
-
          // Simplest case: new node is higher priority, add in before current node.
          if(newNode->data < current->data) 
          {
