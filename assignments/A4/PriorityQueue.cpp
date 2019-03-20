@@ -1,10 +1,18 @@
+/* 
+ * PriorityQueue.cpp
+ *
+ * Description: 
+ *    This class aids the huffman algorithm in which two of the huffman trees with the least frequency
+ *    are joined. This class stores each huffman tree in order of the roots frequency (small to large).
+ * 
+ * Author: Kai Sackville-Hii
+ * Date: March 20, 2019
+ */
 
 #include <iostream>
 #include "PriorityQueue.h"
 #include "QNode.h"
 #include "HuffmanTree.h"
-
-// ---------- CONSTRUCTORS ---------- //
 
 // Default Constructor
 PriorityQueue::PriorityQueue()
@@ -26,8 +34,6 @@ PriorityQueue::~PriorityQueue()
         head = current;
     }
 }
-
-// ---------- QUEUE OPPERATIONS ---------- //
 
 // Description: Returns the number of elements in the Priority Queue.
 // Time Efficiency: O(1)

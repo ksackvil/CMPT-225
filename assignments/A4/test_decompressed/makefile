@@ -36,4 +36,8 @@ TreeNode.o: TreeNode.h TreeNode.cpp
 
 clean:
 	rm -f sim *.o
-	rm -f ./huff
+	rm -f ./t.out
+
+dev: 
+	make
+	./t.out
