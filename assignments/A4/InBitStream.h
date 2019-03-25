@@ -1,5 +1,5 @@
 /* 
- * InBitStream.cpp
+ * InBitStream.h
  *
  * Description: 
  *      This class handles the opperation of read a sequence of bits from the given

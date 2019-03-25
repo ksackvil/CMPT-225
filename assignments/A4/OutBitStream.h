@@ -1,5 +1,5 @@
 /* 
- * InBitStream.cpp
+ * OutBitStream.h
  *
  * Description: 
  *      This class handles the opperation of writing a sequence of bits to the given

@@ -1,3 +1,13 @@
+/* 
+ * PriorityQueue.h
+ *
+ * Description: 
+ *    This class aids the huffman algorithm in which two of the huffman trees with the least frequency
+ *    are joined. This class stores each huffman tree in order of the roots frequency (small to large).
+ * 
+ * Author: Kai Sackville-Hii
+ * Date: March 20, 2019
+ */
 
 #pragma once
 #include <iostream>
@@ -10,18 +20,14 @@ class PriorityQueue
 {
   private:
     QNode *head;       // Pointer to first QNode in the chain
-    int elementCount; // Current count of list items
+    int elementCount;  // Current count of list items
 
   public:
-    // ---------- CONSTRUCTORS ---------- //
-
     // Default Constructor
     PriorityQueue();
 
     // Destructor
     ~PriorityQueue();
-
-    // ---------- QUEUE OPPERATIONS ---------- //
 
     // Description: Returns the number of elements in the Priority Queue.
     // Time Efficiency: O(1)
